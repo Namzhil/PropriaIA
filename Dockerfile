@@ -14,8 +14,8 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN addgroup --gid 1001 appgroup && \
-    adduser --uid 1001 --gid 1001 --no-create-home --disabled-password appuser
+RUN addgroup -g 1001 appgroup && \
+    adduser -u 1001 -G appgroup -H -D appuser
 
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
