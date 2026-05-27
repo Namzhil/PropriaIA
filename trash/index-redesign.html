@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct — Sales & Marketing for Off-Plan Real Estate · PropriaIA</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Modern Reset */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        :root {
+            /* Premium Light Mode Colors */
+            --cream: #FFFBF5;
+            --cream-warm: #F4E4C1;
+            --white: #FFFFFF;
+            
+            --bg-page: #FCFAF8;
+            --bg-card: rgba(255, 255, 255, 0.7);
+            --bg-card-hover: rgba(255, 255, 255, 0.95);
+            --border-glass: rgba(255, 255, 255, 0.8);
+            --border-card: rgba(15, 76, 92, 0.08);
+            
+            /* Original Accents */
+            --terracotta: #E07A5F;
+            --terracotta-glow: rgba(224, 122, 95, 0.2);
+            --sage: #5FAD8A;
+            --sand: #D4C5B0;
+            --indigo: #0F4C5C;
+            --charcoal: #0F2C3C;
+            
+            /* Text */
+            --text-primary: #0F2C3C;
+            --text-secondary: #5A6A7A;
+            --text-muted: #8A9AA8;
+            
+            /* Gradients */
+            --grad-primary: linear-gradient(135deg, #E07A5F 0%, #F4A261 100%);
+            --grad-bg: radial-gradient(circle at top right, rgba(224, 122, 95, 0.08), transparent 40%),
+                       radial-gradient(circle at bottom left, rgba(15, 76, 92, 0.06), transparent 40%);
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--bg-page);
+            background-image: var(--grad-bg);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6, .outfit {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        /* Light Glassmorphism Nav */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            z-index: 1000; padding: 1.2rem 4rem;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(252, 250, 248, 0.75);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(15, 76, 92, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .logo { font-size: 1.7rem; color: var(--indigo); text-decoration: none; font-weight: 800; letter-spacing: -0.03em; }
+        .logo span { background: var(--grad-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-style: italic; }
+
+        .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+        .nav-links a:not(.nav-cta) {
+            text-decoration: none; color: var(--text-secondary);
+            font-weight: 600; font-size: 0.95rem; transition: color 0.3s;
+        }
+        .nav-links a:not(.nav-cta):hover { color: var(--terracotta); }
+
+        .nav-cta {
+            background: var(--indigo);
+            color: #fff; padding: 0.7rem 1.5rem; border-radius: 50px;
+            text-decoration: none; font-weight: 600;
+            transition: all 0.3s; box-shadow: 0 4px 15px rgba(15, 76, 92, 0.15);
+        }
+        .nav-cta:hover { background: var(--terracotta); color: #fff; box-shadow: 0 6px 20px rgba(224, 122, 95, 0.25); transform: translateY(-2px); }
+        
+        .lang-switcher { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; font-weight: 700; }
+        .lang-switcher a { color: var(--text-muted); text-decoration: none; padding: 0.3rem 0.6rem; border-radius: 6px; transition: 0.3s; }
+        .lang-switcher a.active { color: var(--white); background: var(--terracotta); box-shadow: 0 4px 10px rgba(224, 122, 95, 0.2); }
+        .lang-switcher span { color: var(--text-muted); }
+
+        /* Animation Classes */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        /* Layout Utilities */
+        section { padding: 8rem 4rem; position: relative; }
+        .section-header { max-width: 1200px; margin: 0 auto 4rem; text-align: center; }
+        .section-number {
+            display: inline-block; padding: 0.4rem 1rem; border-radius: 50px;
+            background: rgba(224, 122, 95, 0.1); border: 1px solid rgba(224, 122, 95, 0.15);
+            color: var(--terracotta); font-family: 'Outfit'; font-weight: 700; font-size: 0.85rem;
+            text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.5rem;
+        }
+        .section-title { font-size: clamp(2.5rem, 4vw, 3.5rem); margin-bottom: 1.5rem; color: var(--indigo); }
+        .section-desc { font-size: 1.15rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto; line-height: 1.8; }
+
+        .grid-2 { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        .grid-3 { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .grid-4 { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+        .grid-5 { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem; }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            padding: 10rem 4rem 6rem; position: relative; overflow: hidden;
+            background: radial-gradient(100% 100% at 50% 0%, rgba(255,255,255,0.8) 0%, transparent 100%);
+        }
+        .hero::before {
+            content: ''; position: absolute; top: -50%; right: -20%; width: 80%; height: 200%;
+            background: linear-gradient(45deg, rgba(224, 122, 95, 0.03), rgba(95, 173, 138, 0.03));
+            transform: rotate(-15deg); pointer-events: none; z-index: 0;
+        }
+        .hero-content {
+            max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr;
+            gap: 4rem; align-items: center; z-index: 1; position: relative;
+        }
+        
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: var(--white); padding: 0.5rem 1rem; border-radius: 50px;
+            font-size: 0.85rem; font-weight: 700; border: 1px solid rgba(15, 76, 92, 0.08);
+            margin-bottom: 2rem; color: var(--indigo); box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+        .hero-badge::before {
+            content: ''; display: block; width: 8px; height: 8px; border-radius: 50%;
+            background: var(--terracotta); box-shadow: 0 0 10px var(--terracotta);
+        }
+
+        .hero h1 { font-size: clamp(3rem, 5vw, 5rem); margin-bottom: 1.5rem; line-height: 1.1; color: var(--indigo); }
+        .hero h1 em { font-style: italic; background: var(--grad-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-subtitle { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 2.5rem; line-height: 1.8; max-width: 90%; }
+        
+        .btn-primary {
+            background: var(--grad-primary); color: #fff; padding: 1.1rem 2.5rem;
+            border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem;
+            transition: all 0.3s; display: inline-block; border: none; cursor: pointer;
+            box-shadow: 0 10px 25px rgba(224, 122, 95, 0.3);
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(224, 122, 95, 0.4); }
+        
+        .btn-secondary {
+            background: var(--white); color: var(--indigo); padding: 1.1rem 2.5rem;
+            border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem;
+            transition: all 0.3s; display: inline-block; border: 1px solid rgba(15, 76, 92, 0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+        }
+        .btn-secondary:hover { background: var(--bg-page); border-color: rgba(15, 76, 92, 0.2); transform: translateY(-3px); }
+        .hero-buttons { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+
+        .hero-visual { position: relative; perspective: 1000px; }
+        .hero-visual-inner {
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--white); border-radius: 24px; padding: 3rem;
+            box-shadow: 0 30px 60px rgba(15, 76, 92, 0.08), inset 0 2px 0 rgba(255,255,255,1);
+            transform: rotateY(-8deg) rotateX(4deg); transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hero-visual:hover .hero-visual-inner { transform: rotateY(0) rotateX(0); }
+        
+        .metric-card {
+            background: var(--white); padding: 1.5rem 2rem; border-radius: 16px;
+            margin-bottom: 1.5rem; border: 1px solid rgba(15, 76, 92, 0.04);
+            border-left: 4px solid var(--terracotta); display: flex; flex-direction: column; gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+        .metric-card:last-child { margin-bottom: 0; }
+        .metric-card:nth-child(2) { border-left-color: var(--sage); }
+        .metric-card:nth-child(3) { border-left-color: var(--sand); }
+        .metric-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
+        .metric-value { font-family: 'Outfit'; font-size: 2.2rem; color: var(--indigo); font-weight: 800; }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: var(--white); border-top: 1px solid rgba(15, 76, 92, 0.05);
+            border-bottom: 1px solid rgba(15, 76, 92, 0.05); padding: 4rem; position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.01); z-index: 2;
+        }
+        .stat-item h3 { font-size: 4rem; background: var(--grad-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
+        .stat-item p { color: var(--text-secondary); font-size: 1.1rem; font-weight: 600; }
+
+        /* Glass Cards */
+        .glass-card {
+            background: var(--bg-card); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass); border-radius: 24px; padding: 3rem;
+            transition: all 0.4s ease; position: relative; overflow: hidden;
+            box-shadow: 0 15px 35px rgba(15, 76, 92, 0.03);
+        }
+        .glass-card:hover {
+            transform: translateY(-5px); border-color: var(--white);
+            background: var(--bg-card-hover); box-shadow: 0 25px 50px rgba(15, 76, 92, 0.08);
+        }
+        .glass-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: transparent; transition: 0.4s;
+        }
+        
+        .accent-terra::before { background: var(--terracotta); }
+        .accent-sage::before { background: var(--sage); }
+        .accent-sand::before { background: var(--sand); }
+        .accent-indigo::before { background: var(--indigo); }
+        
+        .glass-card h3 { font-size: 1.6rem; color: var(--indigo); margin-bottom: 1rem; font-weight: 800; }
+        .glass-card p { color: var(--text-secondary); line-height: 1.7; font-size: 1.05rem; }
+        .step-label { font-family: 'Outfit'; font-size: 0.85rem; color: var(--terracotta); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; font-weight: 700; }
+
+        /* Flow Section */
+        .flow-section {
+            background: var(--charcoal); color: var(--white);
+            position: relative; overflow: hidden;
+        }
+        .flow-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .flow-section .section-title { color: #fff; }
+        .flow-section .section-desc { color: rgba(255,255,255,0.7); }
+        .flow-section .section-number { background: rgba(212, 197, 176, 0.1); border-color: rgba(212, 197, 176, 0.2); color: var(--sand); }
+        
+        .flow-steps {
+            max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between;
+            align-items: flex-start; gap: 1rem; position: relative; z-index: 1;
+        }
+        .flow-step { text-align: center; flex: 1; }
+        .flow-icon {
+            width: 80px; height: 80px; margin: 0 auto 1.5rem; border-radius: 50%;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; font-family: 'Outfit'; font-weight: 700; color: #fff;
+            transition: all 0.3s;
+        }
+        .flow-step:hover .flow-icon { background: var(--terracotta); border-color: var(--terracotta); box-shadow: 0 0 25px var(--terracotta-glow); transform: scale(1.05); }
+        .flow-step h4 { font-size: 1.2rem; margin-bottom: 0.5rem; color: #fff; }
+        .flow-step p { font-size: 0.95rem; color: rgba(255,255,255,0.6); }
+        .flow-arrow { color: rgba(255,255,255,0.1); font-size: 2rem; margin-top: 20px; }
+
+        /* Agents Section */
+        .agent-icon {
+            width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; font-family: 'Outfit'; font-weight: 800; color: #fff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 1.5rem;
+        }
+        .glass-card.accent-terra .agent-icon { background: linear-gradient(135deg, #E07A5F, #F09A85); }
+        .glass-card.accent-sage .agent-icon { background: linear-gradient(135deg, #5FAD8A, #3D8B6A); }
+        .glass-card.accent-sand .agent-icon { background: linear-gradient(135deg, #D4C5B0, #B8A898); }
+        .glass-card.accent-indigo .agent-icon { background: linear-gradient(135deg, #0F4C5C, #2E6B7C); }
+
+        /* Background Numbers */
+        .num-bg {
+            position: absolute; top: 1.5rem; right: 2rem; font-family: 'Outfit'; font-size: 6rem;
+            font-weight: 800; color: rgba(15, 76, 92, 0.03); line-height: 1; pointer-events: none;
+            transition: color 0.3s;
+        }
+        .glass-card:hover .num-bg { color: rgba(15, 76, 92, 0.06); }
+
+        /* Kit Section (Darker theme snippet in light mode) */
+        .kit-section {
+            background: linear-gradient(135deg, var(--indigo) 0%, var(--indigo-light, #2E6B7C) 100%);
+            color: var(--white);
+        }
+        .kit-section .section-title { color: var(--white); }
+        .kit-section .section-desc { color: rgba(255,255,255,0.8); }
+        .kit-section .section-number { background: rgba(212, 197, 176, 0.1); border-color: rgba(212, 197, 176, 0.2); color: var(--sand); }
+        .kit-section .glass-card {
+            background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);
+        }
+        .kit-section .glass-card:hover {
+            background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .kit-section .glass-card h3 { color: #fff; }
+        .kit-section .glass-card p { color: rgba(255,255,255,0.7); }
+
+        /* Dashboard Preview */
+        .dash-container { max-width: 1200px; margin: 0 auto; }
+        .dash-preview {
+            background: var(--white); border: 1px solid rgba(15, 76, 92, 0.05); border-radius: 24px;
+            padding: 3rem; box-shadow: 0 40px 80px rgba(15, 76, 92, 0.08); overflow-x: auto;
+            position: relative;
+        }
+        .dash-preview::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px;
+            background: var(--grad-primary); border-radius: 24px 24px 0 0;
+        }
+        .dash-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 2px solid rgba(15, 76, 92, 0.03);
+        }
+        .dash-title { font-family: 'Outfit'; font-size: 1.4rem; color: var(--indigo); font-weight: 700; display: flex; align-items: center; gap: 0.5rem; }
+        .dash-title::before { content: ''; width: 10px; height: 10px; background: var(--sage); border-radius: 50%; box-shadow: 0 0 10px rgba(95, 173, 138, 0.5); }
+        
+        .dash-stats { display: flex; gap: 3rem; }
+        .dash-stat { text-align: center; }
+        .dash-stat-value { font-weight: 800; color: var(--terracotta); font-size: 2rem; font-family: 'Outfit'; }
+        .dash-stat-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+        
+        .dash-table { width: 100%; border-collapse: collapse; text-align: left; }
+        .dash-table th { padding: 1.2rem 1rem; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; border-bottom: 2px solid rgba(15, 76, 92, 0.03); }
+        .dash-table td { padding: 1.5rem 1rem; border-bottom: 1px solid rgba(15, 76, 92, 0.03); font-size: 0.95rem; color: var(--text-primary); vertical-align: top; }
+        .dash-table tr:last-child td { border-bottom: none; }
+        .dash-table tr:hover td { background: rgba(15, 76, 92, 0.01); }
+        .dash-table td strong { display: block; color: var(--indigo); font-weight: 700; margin-bottom: 0.3rem; font-size: 1.05rem; }
+        .dash-table td span.sub { font-size: 0.85rem; color: var(--text-secondary); display: block; }
+        
+        .badge {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.8rem; font-weight: 700; text-align: center;
+        }
+        .badge-risk { background: rgba(224, 122, 95, 0.1); color: var(--terracotta); border: 1px solid rgba(224, 122, 95, 0.2); }
+        .badge-hot { background: rgba(212, 197, 176, 0.2); color: #B8A898; border: 1px solid rgba(212, 197, 176, 0.3); }
+        .badge-stalled { background: rgba(95, 173, 138, 0.1); color: var(--sage); border: 1px solid rgba(95, 173, 138, 0.2); }
+        .badge-ok { background: rgba(15, 76, 92, 0.05); color: var(--indigo); border: 1px solid rgba(15, 76, 92, 0.1); }
+
+        /* Lists */
+        ul.custom-list { list-style: none; padding: 0; }
+        ul.custom-list li { padding: 0.8rem 0; position: relative; padding-left: 2rem; color: var(--text-secondary); font-size: 1.05rem; }
+        ul.custom-list li::before { content: '→'; position: absolute; left: 0; color: var(--terracotta); font-weight: 800; }
+        .zone-your li::before { content: '✓'; color: var(--sage); }
+
+        /* Core Section special */
+        .core-section { background: var(--cream); }
+        .core-card {
+            background: var(--white); border: 1px solid rgba(15, 76, 92, 0.04); border-radius: 16px;
+            padding: 2.5rem 1.5rem; text-align: center; transition: all 0.3s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.02);
+        }
+        .core-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(15, 76, 92, 0.06); }
+        .core-num { font-family: 'Outfit'; font-size: 1rem; color: var(--terracotta); margin-bottom: 1rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+        .core-card h3 { font-size: 1.3rem; margin-bottom: 1rem; color: var(--indigo); font-weight: 700; }
+        .core-card p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
+
+        /* Timeline */
+        .timeline { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; position: relative; }
+        .timeline::before {
+            content: ''; position: absolute; top: 24px; left: 10%; right: 10%; height: 3px;
+            background: linear-gradient(90deg, var(--terracotta), var(--sand), var(--sage)); opacity: 0.5;
+        }
+        .timeline-item { text-align: center; flex: 1; position: relative; z-index: 1; }
+        .timeline-dot {
+            width: 50px; height: 50px; border-radius: 50%; margin: 0 auto 1.5rem;
+            background: var(--white); border: 4px solid var(--terracotta);
+            display: flex; align-items: center; justify-content: center; color: var(--terracotta); font-family: 'Outfit'; font-weight: 800;
+            box-shadow: 0 10px 20px rgba(224, 122, 95, 0.2); transition: all 0.3s;
+        }
+        .timeline-item:hover .timeline-dot { transform: scale(1.15); }
+        .timeline-item:nth-child(2) .timeline-dot { border-color: var(--sand); color: var(--sand); box-shadow: 0 10px 20px rgba(212, 197, 176, 0.2); }
+        .timeline-item:nth-child(3) .timeline-dot { border-color: var(--sage); color: var(--sage); box-shadow: 0 10px 20px rgba(95, 173, 138, 0.2); }
+        .timeline-item:nth-child(4) .timeline-dot { border-color: var(--indigo); color: var(--indigo); box-shadow: 0 10px 20px rgba(15, 76, 92, 0.15); }
+        
+        .timeline-item h4 { font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--indigo); font-weight: 700; }
+        .timeline-item p { font-size: 1rem; color: var(--text-secondary); }
+
+        /* FAQ */
+        .faq-container { max-width: 900px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid rgba(15, 76, 92, 0.05); padding: 2rem 0; }
+        .faq-question {
+            font-size: 1.3rem; color: var(--indigo); font-weight: 700; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center; transition: color 0.3s;
+        }
+        .faq-question:hover { color: var(--terracotta); }
+        .faq-question::after { content: '+'; font-size: 2rem; color: var(--terracotta); font-weight: 400; transition: transform 0.3s; }
+        .faq-answer { margin-top: 1.5rem; color: var(--text-secondary); line-height: 1.8; font-size: 1.05rem; display: none; padding-right: 2rem; }
+        .faq-item.active .faq-answer { display: block; animation: fadeIn 0.4s ease; }
+        .faq-item.active .faq-question::after { transform: rotate(45deg); color: var(--indigo); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--terracotta) 0%, var(--indigo) 100%);
+            color: var(--white);
+            text-align: center; padding: 10rem 4rem; position: relative;
+        }
+        .cta-section h2 { font-size: clamp(2.5rem, 4vw, 4rem); margin-bottom: 1.5rem; color: #fff; }
+        .cta-section p { font-size: 1.25rem; margin-bottom: 3.5rem; color: rgba(255,255,255,0.9); max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.8; }
+        .cta-section .btn-primary { background: var(--white); color: var(--indigo); font-size: 1.2rem; padding: 1.2rem 3.5rem; box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+        .cta-section .btn-primary:hover { background: var(--cream); color: var(--terracotta); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.25); }
+
+        /* Footer */
+        footer { border-top: 1px solid rgba(15, 76, 92, 0.05); padding: 6rem 4rem 2rem; background: var(--cream); }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; }
+        .footer-brand { font-size: 2.2rem; margin-bottom: 1rem; color: var(--indigo); text-decoration: none; font-weight: 800; letter-spacing: -0.03em; font-family: 'Outfit'; display: block; }
+        .footer-brand span { color: var(--terracotta); font-style: italic; }
+        .footer-desc { font-size: 1.05rem; line-height: 1.7; color: var(--text-secondary); max-width: 350px; }
+        .footer-col h4 { color: var(--indigo); margin-bottom: 1.5rem; font-size: 1.1rem; font-weight: 700; }
+        .footer-col a { color: var(--text-secondary); text-decoration: none; display: block; padding: 0.5rem 0; transition: color 0.3s; font-size: 1rem; font-weight: 500; }
+        .footer-col a:hover { color: var(--terracotta); transform: translateX(5px); }
+        .footer-bottom {
+            max-width: 1400px; margin: 5rem auto 0; padding-top: 2.5rem; border-top: 1px solid rgba(15, 76, 92, 0.05);
+            display: flex; justify-content: space-between; font-size: 0.95rem; color: var(--text-muted); font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .hero-badge { margin: 0 auto 2rem; }
+            .hero-subtitle { margin: 0 auto 2.5rem; }
+            .hero-buttons { justify-content: center; }
+            .hero-visual-inner { transform: none !important; margin-top: 4rem; }
+            .grid-3, .grid-4, .grid-5 { grid-template-columns: repeat(2, 1fr); }
+            .flow-steps { flex-direction: column; align-items: center; gap: 2rem; }
+            .flow-arrow { transform: rotate(90deg); margin: 0; }
+            .timeline { flex-direction: column; gap: 3rem; }
+            .timeline::before { display: none; }
+            .footer-content { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            section { padding: 5rem 1.5rem; }
+            .hero { padding: 8rem 1.5rem 4rem; }
+            .stats-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr; }
+            .dash-preview { padding: 1.5rem; }
+            .dash-stats { flex-direction: column; gap: 1.5rem; }
+            .footer-content { grid-template-columns: 1fr; gap: 3rem; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#" class="logo">Pro<span>priaIA</span></a>
+        <div class="nav-links">
+            <a href="#funnel">Direct</a>
+            <a href="#agents">AI Agents</a>
+            <a href="#team">Team</a>
+            <a href="#faq">FAQ</a>
+            <div class="lang-switcher">
+                <a href="index.html">ES</a>
+                <span>/</span>
+                <a href="en.html" class="active">EN</a>
+            </div>
+            <a href="#cta" class="nav-cta">Discovery Call</a>
+        </div>
+    </nav>
+
+    <section class="hero reveal">
+        <div class="hero-content">
+            <div>
+                <div class="hero-badge">01 · Direct Sales & Marketing</div>
+                <h1>Direct Sales & Marketing for Your <em>Off-Plan</em> Project</h1>
+                <p class="hero-subtitle">We hire, train, and manage your SDR team. We deploy AI agents, playbook, and sales stack. Direct control over traffic, funnel, and unit economics.</p>
+                <div class="hero-buttons">
+                    <a href="#cta" class="btn-primary">Discovery Call · 45 min</a>
+                    <a href="#funnel" class="btn-secondary">View Architecture</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-visual-inner">
+                    <div class="metric-card">
+                        <div class="metric-label">To first sales</div>
+                        <div class="metric-value">8 semanas</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Active AI agents</div>
+                        <div class="metric-value">4 agentes</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Project outcome</div>
+                        <div class="metric-value">Speed</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="stats-bar reveal">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>8</h3>
+                <p>Weeks to first sales</p>
+            </div>
+            <div class="stat-item">
+                <h3>4</h3>
+                <p>AI agents in funnel</p>
+            </div>
+            <div class="stat-item">
+                <h3>↑</h3>
+                <p>Closing speed</p>
+            </div>
+        </div>
+    </div>
+
+    <section id="funnel" class="reveal">
+        <div class="section-header">
+            <span class="section-number">Funnel Architecture</span>
+            <h2 class="section-title">Three funnel stages → one closed system</h2>
+        </div>
+        <div class="grid-3">
+            <div class="glass-card accent-terra">
+                <div class="step-label">01 Attraction</div>
+                <h3>Paid Traffic</h3>
+                <p>Meta + Google Ads directly via API. AI agent Ads Pilot optimizes campaigns for qualified meetings — quality proxy metric, not lead volume.</p>
+            </div>
+            <div class="glass-card accent-sage">
+                <div class="step-label">02 Conversion</div>
+                <h3>Landing + Quiz</h3>
+                <p>AI Page Builder together with designer builds landing and quiz per campaign in hours, not weeks. A/B tests with Ads Pilot — on the fly.</p>
+            </div>
+            <div class="glass-card accent-sand">
+                <div class="step-label">03 Reactivation</div>
+                <h3>Lead Base</h3>
+                <p>AI Mia works with dormant base — segments, reactivates, drives to meeting with manager.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="flow-section reveal">
+        <div class="section-header">
+            <span class="section-number">Customer Flow</span>
+            <h2 class="section-title">From lead to close — step by step</h2>
+        </div>
+        <div class="flow-steps">
+            <div class="flow-step">
+                <div class="flow-icon">1</div>
+                <h4>Lead in WhatsApp</h4>
+                <p>From quiz or form</p>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+                <div class="flow-icon">2</div>
+                <h4>Qualification</h4>
+                <p>Mia in WhatsApp · &lt;30 sec</p>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+                <div class="flow-icon">3</div>
+                <h4>Meeting booked</h4>
+                <p>Mia passes to sales manager</p>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+                <div class="flow-icon">4</div>
+                <h4>Meeting held</h4>
+                <p>In office or online</p>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+                <div class="flow-icon">5</div>
+                <h4>Close</h4>
+                <p>Manager closes the client</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="agents" class="reveal">
+        <div class="section-header">
+            <span class="section-number">AI Agents</span>
+            <h2 class="section-title">4 AI agents working in the funnel 24/7</h2>
+        </div>
+        <div class="grid-2">
+            <div class="glass-card accent-terra">
+                <div class="agent-icon">M</div>
+                <h3>AI Mia</h3>
+                <p>Responds to every inbound in WhatsApp in &lt;30 sec, 24/7, in any language. Qualifies and books meetings. Simultaneously works with dormant base — reactivates old leads.</p>
+            </div>
+            <div class="glass-card accent-sage">
+                <div class="agent-icon">D</div>
+                <h3>AI Deal Inspector</h3>
+                <p>Monitors CRM. Raises flag before a deal falls through. Forgotten touches, dead conversations — everything on the radar.</p>
+            </div>
+            <div class="glass-card accent-sand">
+                <div class="agent-icon">A</div>
+                <h3>AI Ads Pilot</h3>
+                <p>Manages campaigns on Google and Meta via API. Learns from qualified meetings (offline conversions) — quality proxy, not volume.</p>
+            </div>
+            <div class="glass-card accent-indigo">
+                <div class="agent-icon">P</div>
+                <h3>AI Page Builder</h3>
+                <p>Builds landings, quizzes, email and WhatsApp templates per campaign or launch. Hours instead of weeks. A/B tests with Ads Pilot — on the fly.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="reveal">
+        <div class="section-header">
+            <span class="section-number">Local + International</span>
+            <h2 class="section-title">Buyers are not always local. The funnel captures those who are abroad too.</h2>
+        </div>
+        <div class="grid-3">
+            <div class="glass-card">
+                <div class="num-bg">01</div>
+                <h3>Multilingual Leads</h3>
+                <p>Mia speaks the client's language. Inbounds from multiple countries go to a single pipeline. Mia responds in the request language — Spanish, English, Portuguese, French. Manager receives hot leads with translation ready.</p>
+            </div>
+            <div class="glass-card">
+                <div class="num-bg">02</div>
+                <h3>Traffic in Multiple Geos</h3>
+                <p>Meta and Google deploy by demand origin countries. Per market — creative in local language, landing, quiz. Page Builder and Ads Pilot — in minutes, not weeks.</p>
+            </div>
+            <div class="glass-card">
+                <div class="num-bg">03</div>
+                <h3>Closing via Local Partners</h3>
+                <p>Buyer from a country where we have a partner-agent with local expertise — we connect to close. Commission is split by agreed scheme, exclusivity is not signed.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="kit-section reveal">
+        <div class="section-header">
+            <span class="section-number">Launch Kit</span>
+            <h2 class="section-title">For every launch — complete kit in hand.</h2>
+            <p class="section-desc">Page Builder, designer, and Mia assemble the kit per campaign or launch. Hours instead of weeks.</p>
+        </div>
+        <div class="grid-4">
+            <div class="glass-card">
+                <div class="step-label" style="color: var(--sand);">01</div>
+                <h3>Landing + Quiz</h3>
+                <p>Page Builder builds page per campaign from best-converting templates. A/B variants — on the fly.</p>
+            </div>
+            <div class="glass-card">
+                <div class="step-label" style="color: var(--sand);">02</div>
+                <h3>Meta / Google Creatives</h3>
+                <p>Designer together with Ads Pilot. Multiple formats per placement window, retarget to base.</p>
+            </div>
+            <div class="glass-card">
+                <div class="step-label" style="color: var(--sand);">03</div>
+                <h3>Email Template</h3>
+                <p>Per project — mailing to base with USP, phase updates, payment plan. Manager signatures — yours.</p>
+            </div>
+            <div class="glass-card">
+                <div class="step-label" style="color: var(--sand);">04</div>
+                <h3>WhatsApp Welcome Flow</h3>
+                <p>Mia conducts first contact per project scenario. Manager receives hot leads with assembled context.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="reveal">
+        <div class="section-header">
+            <span class="section-number">In Production</span>
+            <h2 class="section-title">These are not slides. This is what the manager sees after the build.</h2>
+        </div>
+        <div class="dash-container">
+            <div class="dash-preview">
+                <div class="dash-header">
+                    <div class="dash-title">Deal Inspector · Funnel · 47 active</div>
+                    <div class="dash-stats">
+                        <div class="dash-stat"><div class="dash-stat-value">3</div><div class="dash-stat-label">risk</div></div>
+                        <div class="dash-stat"><div class="dash-stat-value">2</div><div class="dash-stat-label">stalled</div></div>
+                        <div class="dash-stat"><div class="dash-stat-value">5</div><div class="dash-stat-label">hot</div></div>
+                    </div>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="dash-table">
+                        <thead>
+                            <tr><th>Lead / Deal</th><th>Stage</th><th>Last touch</th><th>Score</th><th>Inspector Action</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Lead #4181 · A. Martínez</strong><span class="sub">$2.1M · 2BR · Project Sol · meeting booked</span></td>
+                                <td>Negotiation</td><td>3 days</td><td>87</td>
+                                <td><span class="badge badge-risk">Risk · no follow-up 72h</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Lead #4203 · S. Hernández</strong><span class="sub">$3.5M · 3BR · Project Luna · routed by Mia</span></td>
+                                <td>Discovery</td><td>12 min</td><td>94</td>
+                                <td><span class="badge badge-hot">Hot · respond in 5 min</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Lead #4127 · R. Domínguez</strong><span class="sub">$5.8M · 3BR · Project Sol · proposal sent</span></td>
+                                <td>Proposal</td><td>14 days</td><td>71</td>
+                                <td><span class="badge badge-stalled">Stalled · escalate to Lead</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Lead #4159 · M. López</strong><span class="sub">$1.8M · 2BR · Project Sol · contract signed</span></td>
+                                <td>Reservation</td><td>yesterday</td><td>98</td>
+                                <td><span class="badge badge-ok">On track · no actions</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Lead #4112 · J. Aguilar</strong><span class="sub">$950K · 1BR · Project Luna · attribution: Ads Pilot</span></td>
+                                <td>Closed-won</td><td>5 days</td><td>—</td>
+                                <td><span class="badge badge-ok">Won · in Ads optimizer</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="reveal">
+        <div class="section-header">
+            <span class="section-number">Team</span>
+            <h2 class="section-title">The team is your sales department, not contractors</h2>
+        </div>
+        <div class="grid-2">
+            <div class="glass-card accent-terra">
+                <div class="step-label">First Line · Staff on your payroll</div>
+                <h3>First Line Team (SDR)</h3>
+                <ul class="custom-list">
+                    <li>Call back those who didn't respond in messengers</li>
+                    <li>Pick up complex dialogs that Mia passed to human</li>
+                    <li>Goal: fill manager calendars with meetings</li>
+                </ul>
+            </div>
+            <div class="glass-card accent-sage">
+                <div class="step-label">Managers · Staff on your payroll</div>
+                <h3>Sales Office Managers</h3>
+                <ul class="custom-list">
+                    <li>Conduct meetings, close sales</li>
+                    <li>Don't look for leads — first line fills calendars</li>
+                    <li>Trainer coaches with real call recordings</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="core-section reveal">
+        <div class="section-header">
+            <span class="section-number">Operational Core</span>
+            <h2 class="section-title">Ready operational core: 4 people + AI stack.</h2>
+        </div>
+        <div class="grid-5">
+            <div class="core-card">
+                <div class="core-num">01 · PM</div>
+                <h3>Project Manager</h3>
+                <p>Coordinates team<br>KPI: speed, conversion, NPS<br>Weekly review with you</p>
+            </div>
+            <div class="core-card">
+                <div class="core-num">02 · Trainer</div>
+                <h3>Sales Trainer</h3>
+                <p>Selects and trains SDR and managers<br>Onboarding — 14 days to production<br>Analyzes real recordings</p>
+            </div>
+            <div class="core-card">
+                <div class="core-num">03 · Traffic</div>
+                <h3>Traffic Manager</h3>
+                <p>Budgets, creatives, A/B<br>Together with Ads Pilot and Page Builder<br>Optimizes for meeting cost</p>
+            </div>
+            <div class="core-card">
+                <div class="core-num">04 · Design</div>
+                <h3>Designer</h3>
+                <p>Creatives for ads (Meta, Google, retarget)<br>Landings and quizzes<br>Print and digital materials</p>
+            </div>
+            <div class="core-card">
+                <div class="core-num">05 · AI</div>
+                <h3>4 AI Agents</h3>
+                <p>Mia · WhatsApp 24/7<br>Deal Inspector · funnel<br>Ads Pilot · advertising<br>Page Builder · landings</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="reveal">
+        <div class="section-header">
+            <span class="section-number">Zones</span>
+            <h2 class="section-title">Your involvement — minimal</h2>
+        </div>
+        <div class="grid-2">
+            <div class="glass-card zone-your accent-sage">
+                <h3>Your Zone</h3>
+                <ul class="custom-list">
+                    <li>Strategic decisions, pricing, budgets</li>
+                    <li>Weekly review with our PM</li>
+                    <li>You own the project from your side</li>
+                </ul>
+            </div>
+            <div class="glass-card zone-ours accent-terra">
+                <h3>Our Zone</h3>
+                <ul class="custom-list">
+                    <li>Our team finds the leads</li>
+                    <li>Our PM manages the team</li>
+                    <li>Processes are our responsibility</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="reveal">
+        <div class="section-header">
+            <span class="section-number">How It Works</span>
+            <h2 class="section-title">8 weeks of building. Then — sales and growth.</h2>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot">1</div>
+                <h4>Discovery</h4>
+                <p>45 min intro. Audit if needed.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot">2</div>
+                <h4>Build · 4-8 weeks</h4>
+                <p>Team built, funnel launched. By week 8 — first sales.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot">3</div>
+                <h4>First Sales</h4>
+                <p>We scale hypotheses that work.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot">4</div>
+                <h4>Growth · 6 months</h4>
+                <p>We reach target sales velocity.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="reveal">
+        <div class="section-header">
+            <span class="section-number">Commercial</span>
+            <h2 class="section-title">Retainer + percentage of closed sales</h2>
+        </div>
+        <div class="grid-2">
+            <div class="glass-card accent-terra">
+                <h3>Months 1-3 · Build</h3>
+                <p>8 weeks of building + calibration. Recruitment, first line training, CRM setup, AI training on your data, playbook writing.</p>
+            </div>
+            <div class="glass-card accent-sage">
+                <h3>Months 4+ · Operations</h3>
+                <p>PM, trainer, traffic manager, AI stack, team support. Stable. Plus percentage of closed sales.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="reveal">
+        <div class="section-header">
+            <span class="section-number">FAQ</span>
+            <h2 class="section-title">Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">How is this different from an ad agency?</div>
+                <div class="faq-answer">An agency leaves — advertising stops. You're left with only contract debt. Direct is a sales department that stays with you: team on your payroll, configured CRM, playbook, creatives. We build in 8 weeks — then it works for you.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What happens to our current sales team?</div>
+                <div class="faq-answer">We resolve in discovery — three scenarios: Integrate (strong team, we update playbook and tools), Strengthen (there are gaps, we hire missing roles), or Partially Replace (if objectively needed, you decide).</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">If after 3 months results are weak, can we exit?</div>
+                <div class="faq-answer">6 months is the minimum to reach target KPI. At 3 months of operation (month 5 from start) — checkpoint: On target → we continue, Close → we correct model, Doesn't work → we part ways with no penalties.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What if AI ruins a $200K–$2M deal?</div>
+                <div class="faq-answer">AI only does work where it cannot make decisions affecting the sale. Mia answers typical questions, qualifies, books meetings. Does not name off-list prices, does not promise individual terms. Human escalation is automatic in 4 cases: off-list price, discount, low confidence score, or keywords like "lawyer", "contract", "escrow", "cancellation".</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How much does it cost?</div>
+                <div class="faq-answer">Structure: Retainer in two modes (months 1-3 build, months 4+ operations) + fixed percentage of closed revenue. Exact amount and percentage are calculated in discovery after reviewing project economics: GDV, sales cycle, unit types, market maturity.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What do we keep after the contract?</div>
+                <div class="faq-answer">Team (SDR, managers) — on your payroll, they stay. CRM, playbook, knowledge base, creatives, landings — yours. AI agents — our IP. After contract they work by subscription $3.5k/mo or one-time purchase $50k. You can opt out — department works without AI, just slower.</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cta" class="cta-section reveal">
+        <h2>Does your project fit Direct?</h2>
+        <p>45 minutes. You show us the numbers — we tell you what to change, what KPI we can set, and if it makes sense to keep talking.</p>
+        <a href="#" class="btn-primary" style="font-size: 1.2rem; padding: 1.2rem 3.5rem;">Book Discovery Call</a>
+    </section>
+
+    <footer>
+        <div class="footer-content reveal">
+            <div>
+                <a href="#" class="footer-brand">Pro<span>priaIA</span></a>
+                <p class="footer-desc">Turnkey sales department for off-plan developers. Direct and channel sales. In 8 weeks we build team, playbook, sales stack and AI.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Products</h4>
+                <a href="#">Direct</a>
+                <a href="#">Canal</a>
+            </div>
+            <div class="footer-col">
+                <h4>About</h4>
+                <a href="#">How it works</a>
+                <a href="#">Who it serves</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+        <div class="footer-bottom reveal">
+            <span>© 2026 PropriaIA</span>
+            <span>v2.1 · 2026-05-21 · EN · Light Mode Redesign</span>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                const item = q.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Close all others
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

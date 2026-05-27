@@ -2,5 +2,8 @@ services:
   web:
     build: .
     ports:
-      - "19999:80"
+      - "19999:3000"
+    environment:
+      - GMAIL_USER=${GMAIL_USER}
+      - GMAIL_APP_PASSWORD=${GMAIL_APP_PASSWORD}
     restart: unless-stopped
