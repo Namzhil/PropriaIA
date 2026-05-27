@@ -13,6 +13,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: isEn
       ? 'Turnkey sales department for off-plan developers. Direct and channel sales. In 8 weeks we build team, playbook, sales stack and AI.'
       : 'Departamento de ventas llave en mano para promotores off-plan. Ventas directas y de canal. En 8 semanas construimos equipo, playbook, stack de ventas e IA.',
+    alternates: {
+      canonical: `https://propria.ai/${locale}`,
+      languages: {
+        en: 'https://propria.ai/en',
+        es: 'https://propria.ai/es',
+      },
+    },
   };
 }
 
