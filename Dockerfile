@@ -1,21 +1,21 @@
-FROM node:20-alpine AS deps
+FROM node:20-bookworm-slim AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm cache clean --force && npm install --prefer-offline
+RUN npm ci --legacy-peer-deps
 
-FROM node:20-alpine AS builder
+FROM node:20-bookworm-slim AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
 
-FROM node:20-alpine AS runner
+FROM node:20-bookworm-slim AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN addgroup -g 1001 appgroup && \
-    adduser -u 1001 -G appgroup -H -D appuser
+RUN addgroup --system --gid 1001 appgroup && \
+    adduser --system --uid 1001 appuser
 
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
