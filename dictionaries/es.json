@@ -22,8 +22,8 @@
     "transformTime": "1 mes",
     "agents": "Agentes IA activos",
     "agentsCount": "4 agentes",
-    "outcome": "Resultado del proyecto",
-    "outcomeResult": "Velocidad"
+    "outcome": "Proyecto resultado",
+    "outcomeResult": "Crecimiento de ventas"
   },
   "transform": {
     "eyebrow": "Transformación con IA",
@@ -173,8 +173,7 @@
     "button": "Agendar Llamada de Descubrimiento",
     "namePlaceholder": "Tu nombre",
     "emailPlaceholder": "Tu email",
-    "phonePlaceholder": "Teléfono (opcional)",
-    "messagePlaceholder": "Mensaje (opcional)",
+    "messagePlaceholder": "Tu mensaje",
     "sending": "Enviando...",
     "success": "¡Gracias! Nos pondremos en contacto contigo pronto.",
     "error": "Algo salió mal. Por favor, inténtalo de nuevo."

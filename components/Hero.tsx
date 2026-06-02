@@ -1,3 +1,5 @@
+import { RefreshCw, Bot, TrendingUp } from 'lucide-react';
+
 export default function Hero({ dict }: { dict: any }) {
   return (
     <section className="hero">
@@ -18,21 +20,21 @@ export default function Hero({ dict }: { dict: any }) {
         <div className="hero-visual">
           <div className="metric-stack">
             <div className="metric-pill">
-              <div className="metric-icon">🚀</div>
+              <div className="metric-icon"><RefreshCw size={24} strokeWidth={1.5} /></div>
               <div>
                 <div className="metric-label">{dict.metrics.transform}</div>
                 <div className="metric-value">{dict.metrics.transformTime}</div>
               </div>
             </div>
             <div className="metric-pill">
-              <div className="metric-icon">🤖</div>
+              <div className="metric-icon"><Bot size={24} strokeWidth={1.5} /></div>
               <div>
                 <div className="metric-label">{dict.metrics.agents}</div>
                 <div className="metric-value">{dict.metrics.agentsCount}</div>
               </div>
             </div>
             <div className="metric-pill">
-              <div className="metric-icon">⚡</div>
+              <div className="metric-icon"><TrendingUp size={24} strokeWidth={1.5} /></div>
               <div>
                 <div className="metric-label">{dict.metrics.outcome}</div>
                 <div className="metric-value">{dict.metrics.outcomeResult}</div>

@@ -22,11 +22,28 @@ export default function FAQ({ dict }: { dict: any }) {
       </div>
       <div className="faq-container">
         {questions.map((item, i) => (
-          <div key={i} className={`faq-item reveal${openIndex === i ? ' active' : ''}`}>
-            <div className="faq-question" onClick={() => setOpenIndex(openIndex === i ? null : i)}>
+          <div
+            key={i}
+            className={`faq-item${openIndex === i ? ' active' : ''}`}
+            style={{ animationDelay: `${i * 0.08}s` }}
+          >
+            <button
+              className="faq-question"
+              onClick={() => setOpenIndex(openIndex === i ? null : i)}
+              aria-expanded={openIndex === i}
+              type="button"
+            >
               {item.q}
+            </button>
+            <div
+              className="faq-answer"
+              style={{
+                maxHeight: openIndex === i ? '500px' : '0px',
+                opacity: openIndex === i ? 1 : 0,
+              }}
+            >
+              <p>{item.a}</p>
             </div>
-            <div className="faq-answer">{item.a}</div>
           </div>
         ))}
       </div>

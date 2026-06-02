@@ -22,8 +22,8 @@
     "transformTime": "1 month",
     "agents": "Active AI agents",
     "agentsCount": "4 agents",
-    "outcome": "Project outcome",
-    "outcomeResult": "Speed"
+    "outcome": "Project outcame",
+    "outcomeResult": "Sales growth"
   },
   "transform": {
     "eyebrow": "AI Transformation",
@@ -173,8 +173,7 @@
     "button": "Book Discovery Call",
     "namePlaceholder": "Your name",
     "emailPlaceholder": "Your email",
-    "phonePlaceholder": "Phone (optional)",
-    "messagePlaceholder": "Message (optional)",
+    "messagePlaceholder": "Your message",
     "sending": "Sending...",
     "success": "Thank you! We'll get back to you soon.",
     "error": "Something went wrong. Please try again."

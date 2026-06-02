@@ -4,7 +4,7 @@ import nodemailer from 'nodemailer';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, phone, message, locale } = body;
+    const { name, email, message, locale } = body;
 
     if (!name || !email) {
       return NextResponse.json({ error: 'Name and email are required' }, { status: 400 });
@@ -26,7 +26,6 @@ export async function POST(request: Request) {
       <h2>${subject}</h2>
       <p><strong>Name:</strong> ${name}</p>
       <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
       <p><strong>Message:</strong></p>
       <p>${message || 'No message'}</p>
       <hr />

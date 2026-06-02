@@ -1,7 +1,8 @@
-export default function Footer({ dict }: { dict: any }) {
+export default function Footer({ dict, locale }: { dict: any; locale?: string }) {
   const brand = dict.brand as string;
   const brandParts = brand.split(/(AI|IA)/);
   const highlight = brand.match(/(AI|IA)/)?.[0] || '';
+  const loc = locale || 'en';
 
   return (
     <footer>
@@ -19,12 +20,12 @@ export default function Footer({ dict }: { dict: any }) {
           <h4>{dict.footer.col2Title}</h4>
           <a href="#">{dict.footer.col2Item1}</a>
           <a href="#">{dict.footer.col2Item2}</a>
-          <a href="#">{dict.footer.col2Item3}</a>
+          <a href="#cta">{dict.footer.col2Item3}</a>
         </div>
         <div className="footer-col">
           <h4>{dict.footer.col3Title}</h4>
-          <a href="#">{dict.footer.col3Item1}</a>
-          <a href="#">{dict.footer.col3Item2}</a>
+          <a href={`/${loc}/terms`}>{dict.footer.col3Item1}</a>
+          <a href={`/${loc}/privacy`}>{dict.footer.col3Item2}</a>
         </div>
       </div>
       <div className="footer-bottom">

@@ -31,7 +31,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <Timeline dict={dict} />
       <FAQ dict={dict} />
       <CTA dict={dict} locale={locale} />
-      <Footer dict={dict} />
+      <Footer dict={dict} locale={locale} />
     </>
   );
 }

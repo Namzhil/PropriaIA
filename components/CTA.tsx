@@ -16,7 +16,6 @@ export default function CTA({ dict, locale }: { dict: any; locale: string }) {
         body: JSON.stringify({
           name: formData.get('name'),
           email: formData.get('email'),
-          phone: formData.get('phone'),
           message: formData.get('message'),
           locale,
         }),
@@ -46,7 +45,6 @@ export default function CTA({ dict, locale }: { dict: any; locale: string }) {
       <form className="cta-form" onSubmit={handleSubmit}>
         <input type="text" name="name" placeholder={dict.cta.namePlaceholder} required />
         <input type="email" name="email" placeholder={dict.cta.emailPlaceholder} required />
-        <input type="tel" name="phone" placeholder={dict.cta.phonePlaceholder} />
         <textarea name="message" placeholder={dict.cta.messagePlaceholder} rows={3} />
         <button type="submit" disabled={formState === 'sending'}>
           {formState === 'sending' ? dict.cta.sending : dict.cta.button}
