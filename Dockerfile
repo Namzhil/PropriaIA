@@ -1,11 +1,7 @@
-FROM node:20-bookworm-slim AS deps
-WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm install --no-audit --no-fund
-
 FROM node:20-bookworm-slim AS builder
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+COPY package.json package-lock.json ./
+RUN NODE_OPTIONS="--max-old-space-size=768" npm install --maxsockets 1
 COPY . .
 RUN npm run build
 
