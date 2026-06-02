@@ -1,7 +1,7 @@
 FROM node:20-bookworm-slim AS builder
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN NODE_OPTIONS="--max-old-space-size=768" npm install --maxsockets 1
+COPY package.json ./
+RUN npm install
 COPY . .
 RUN npm run build
 
