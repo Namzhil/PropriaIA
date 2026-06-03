@@ -44,7 +44,7 @@
     "title": "4 AI agents working in the funnel 24/7",
     "agent1Name": "AI Mia",
     "agent1Role": "Frontline Responder",
-    "agent1Desc": "Responds to every inbound in WhatsApp in <30 sec, 24/7, in any language. Qualifies and books meetings. Simultaneously works with dormant base.",
+    "agent1Desc": "Responds to every inbound in WhatsApp in under 30 sec, 24/7, in any language. Qualifies and books meetings. Simultaneously works with dormant base.",
     "agent1Tags": "WhatsApp, Qualification, Booking, Reactivation, Multilingual",
     "agent2Name": "AI Deal Inspector",
     "agent2Role": "Pipeline Watchdog",
@@ -80,7 +80,7 @@
     "step1Title": "Lead in WhatsApp",
     "step1Desc": "From quiz or form",
     "step2Title": "Qualification",
-    "step2Desc": "Mia in WhatsApp · <30 sec",
+    "step2Desc": "Mia in WhatsApp — under 30 sec",
     "step3Title": "Meeting booked",
     "step3Desc": "Mia passes to sales manager",
     "step4Title": "Meeting held",
@@ -176,7 +176,10 @@
     "messagePlaceholder": "Your message",
     "sending": "Sending...",
     "success": "Thank you! We'll get back to you soon.",
-    "error": "Something went wrong. Please try again."
+    "successSub": "We have received your message and will contact you shortly.",
+    "error": "Something went wrong. Please try again.",
+    "errorName": "Please enter your name",
+    "errorEmail": "Please enter a valid email address"
   },
   "footer": {
     "brand": "PropriaAI",

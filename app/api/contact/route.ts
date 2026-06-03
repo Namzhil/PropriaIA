@@ -10,11 +10,24 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Name and email are required' }, { status: 400 });
     }
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json({ error: 'Invalid email address' }, { status: 400 });
+    }
+
+    const gmailUser = process.env.GMAIL_USER;
+    const gmailPass = process.env.GMAIL_APP_PASSWORD;
+
+    if (!gmailUser || !gmailPass) {
+      console.error('GMAIL_USER or GMAIL_APP_PASSWORD not configured');
+      return NextResponse.json({ error: 'Email service not configured' }, { status: 500 });
+    }
+
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD,
+        user: gmailUser,
+        pass: gmailPass,
       },
     });
 
@@ -33,8 +46,8 @@ export async function POST(request: Request) {
     `;
 
     await transporter.sendMail({
-      from: process.env.GMAIL_USER,
-      to: process.env.GMAIL_USER,
+      from: gmailUser,
+      to: gmailUser,
       subject,
       html: htmlBody,
       replyTo: email,

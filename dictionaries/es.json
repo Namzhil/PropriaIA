@@ -44,7 +44,7 @@
     "title": "4 agentes de IA trabajando en el embudo 24/7",
     "agent1Name": "IA Mia",
     "agent1Role": "Respondedora de Primera Línea",
-    "agent1Desc": "Responde a cada mensaje entrante en WhatsApp en <30 seg, 24/7, en cualquier idioma. Califica y agenda reuniones. Trabaja simultáneamente con la base inactiva.",
+    "agent1Desc": "Responde a cada mensaje entrante en WhatsApp en menos de 30 seg, 24/7, en cualquier idioma. Califica y agenda reuniones. Trabaja simultáneamente con la base inactiva.",
     "agent1Tags": "WhatsApp, Calificación, Agendado, Reactivación, Multilingüe",
     "agent2Name": "Inspector de Negocios IA",
     "agent2Role": "Guardián del Embudo",
@@ -80,7 +80,7 @@
     "step1Title": "Lead en WhatsApp",
     "step1Desc": "Desde quiz o formulario",
     "step2Title": "Calificación",
-    "step2Desc": "Mia en WhatsApp · <30 seg",
+    "step2Desc": "Mia en WhatsApp — menos de 30 seg",
     "step3Title": "Reunión agendada",
     "step3Desc": "Mia pasa al gerente de ventas",
     "step4Title": "Reunión realizada",
@@ -176,7 +176,10 @@
     "messagePlaceholder": "Tu mensaje",
     "sending": "Enviando...",
     "success": "¡Gracias! Nos pondremos en contacto contigo pronto.",
-    "error": "Algo salió mal. Por favor, inténtalo de nuevo."
+    "successSub": "Hemos recibido tu mensaje y te contactaremos en breve.",
+    "error": "Algo salió mal. Por favor, inténtalo de nuevo.",
+    "errorName": "Por favor, ingresa tu nombre",
+    "errorEmail": "Por favor, ingresa un correo electrónico válido"
   },
   "footer": {
     "brand": "PropriaIA",
